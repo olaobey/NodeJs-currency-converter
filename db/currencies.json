@@ -1,0 +1,38 @@
+[
+  {
+    "fromCurrency": "NGN",
+    "fromCurrencyFullName": "Nigerian Naira",
+    "fromAmount": 1,
+    "toCurrency": "USD",
+    "toCurrencyFullName": "United States Dollar",
+    "toAmount": 10,
+    "exchangeRate": 740
+  },
+  {
+    "fromCurrency": "NGN",
+    "fromCurrencyFullName": "Nigerian Naira",
+    "fromAmount": 1,
+    "toCurrency": "GBP",
+    "toCurrencyFullName": "United States Dollar",
+    "toAmount": 10,
+    "exchangeRate": 830
+  },
+  {
+    "fromCurrency": "NGN",
+    "fromCurrencyFullName": "Nigerian Naira",
+    "fromAmount": 1,
+    "toCurrency": "EUR",
+    "toCurrencyFullName": "United States Dollar",
+    "toAmount": 10,
+    "exchangeRate": 714
+  },
+  {
+    "fromCurrency": "NGN",
+    "fromCurrencyFullName": "Nigerian Naira",
+    "fromAmount": 1,
+    "toCurrency": "RFW",
+    "toCurrencyFullName": "United States Dollar",
+    "toAmount": 10,
+    "exchangeRate": 0.42
+  }
+]
