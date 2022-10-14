@@ -8,7 +8,7 @@ const { request } = require("https");
 const currenciesDbPath = path.join(__dirname, "db", "currencies.json");
 let currenciesDB = [];
 
-const PORT = 5000;
+const PORT = 3000;
 const HOST_NAME = "localhost";
 
 const requestHandler = async function (req, res) {
@@ -21,7 +21,7 @@ const requestHandler = async function (req, res) {
     addCurrency(req, res);
   } else if (url === "/currencies" && method === "PUT") {
     updateCurrency(req, req);
-  } else if (url.startsWith === "/currencies" && method === "DELETE") {
+  } else if (url.startsWith("/currencies") && method === "DELETE") {
     deleteCurrency(req, res);
   } else {
     res.writeHead(404);
@@ -36,7 +36,6 @@ const requestHandler = async function (req, res) {
 // Retrieve All Currencies
 const getAllCurrencies = function (req, res) {
   fs.readFile(currenciesDbPath, "utf8", (err, currencies) => {
-    console.log(currencies);
     if (err) {
       console.log(err);
       res.writeHead(400);
@@ -59,7 +58,7 @@ const addCurrency = function (req, res) {
     //GET ID OF THE LAST CURRENCY IN THE DATABASE
     const lastCurrency = currenciesDB[currenciesDB.lenght - 1];
     const lastCurrencyId = lastCurrency.id;
-    newCurrency.id = lastCurrency.id + 1;
+    newCurrency.id = lastCurrencyId + 1;
 
     //SAVE TO DATABASE
     currenciesDB.push(newCurrency);
@@ -146,7 +145,7 @@ const deletcurrency = function (req, res) {
   currenciesDB.splice(currencyIndex, 1);
 
   //UPDATE THE DATABASE
-  fs.writeFile(currenciesDb, JSON.stringify(currenciesDB), (err) => {
+  fs.writeFile(currenciesDbPath, JSON.stringify(currenciesDB), (err) => {
     if (err) {
       console.log(err);
       res.writeHead(500);
@@ -166,6 +165,5 @@ const deletcurrency = function (req, res) {
 //CREATE SERVER
 const server = http.createServer(requestHandler);
 server.listen(PORT, HOST_NAME, () => {
-  currenciesDB = JSON.parse(fs.writeFileSync(currenciesDbPath, "utf8"));
   console.log(`Server is listening on ${HOST_NAME}:${PORT}`);
 });
