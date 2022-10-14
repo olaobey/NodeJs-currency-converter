@@ -6,7 +6,8 @@
     "toCurrency": "USD",
     "toCurrencyFullName": "United States Dollar",
     "toAmount": 10,
-    "exchangeRate": 740
+    "exchangeRate": 740,
+    "id": 1
   },
   {
     "fromCurrency": "NGN",
@@ -15,7 +16,8 @@
     "toCurrency": "GBP",
     "toCurrencyFullName": "United States Dollar",
     "toAmount": 10,
-    "exchangeRate": 830
+    "exchangeRate": 830,
+    "id": 2
   },
   {
     "fromCurrency": "NGN",
@@ -24,7 +26,8 @@
     "toCurrency": "EUR",
     "toCurrencyFullName": "United States Dollar",
     "toAmount": 10,
-    "exchangeRate": 714
+    "exchangeRate": 714,
+    "id": 3
   },
   {
     "fromCurrency": "NGN",
@@ -33,6 +36,7 @@
     "toCurrency": "RFW",
     "toCurrencyFullName": "United States Dollar",
     "toAmount": 10,
-    "exchangeRate": 0.42
+    "exchangeRate": 0.42,
+    "id": 4
   }
 ]

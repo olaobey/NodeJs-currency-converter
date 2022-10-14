@@ -6,20 +6,22 @@ const { fstat } = require("fs");
 const { request } = require("https");
 
 const currenciesDbPath = path.join(__dirname, "db", "currencies.json");
-const PORT = 3000;
+let currenciesDB = [];
+
+const PORT = 5000;
 const HOST_NAME = "localhost";
 
-const requestHandler = function (req, res) {
+const requestHandler = async function (req, res) {
   res.setHeader("content-Type", "application/json");
   const { url, method } = req;
 
-  if (req === "/currencies" && req === "GET") {
+  if (url === "/currencies" && method === "GET") {
     getAllCurrencies(req, res);
-  } else if (req === "/currencies" && req === "POST") {
+  } else if (url === "/currencies" && method === "POST") {
     addCurrency(req, res);
-  } else if (req === "/currencies" && req === "PUT") {
+  } else if (url === "/currencies" && method === "PUT") {
     updateCurrency(req, req);
-  } else if (req === "/currencies" && req === "DELETE") {
+  } else if (url.startsWith === "/currencies" && method === "DELETE") {
     deleteCurrency(req, res);
   } else {
     res.writeHead(404);
@@ -32,8 +34,9 @@ const requestHandler = function (req, res) {
 };
 
 // Retrieve All Currencies
-const getALLCurrencies = function (req, res) {
+const getAllCurrencies = function (req, res) {
   fs.readFile(currenciesDbPath, "utf8", (err, currencies) => {
+    console.log(currencies);
     if (err) {
       console.log(err);
       res.writeHead(400);
@@ -41,7 +44,6 @@ const getALLCurrencies = function (req, res) {
     }
     res.end(currencies);
   });
-  console.log(getALLCurrencies);
 };
 
 //CREATE A CURRENCY
@@ -53,14 +55,14 @@ const addCurrency = function (req, res) {
   req.on("end", () => {
     const parsedBody = Buffer.concat(body).toString();
     const newCurrency = JSON.parse(parsedBody);
-    console.log(newCurrency);
+
     //GET ID OF THE LAST CURRENCY IN THE DATABASE
     const lastCurrency = currenciesDB[currenciesDB.lenght - 1];
     const lastCurrencyId = lastCurrency.id;
     newCurrency.id = lastCurrency.id + 1;
 
     //SAVE TO DATABASE
-    currenciesDb.push(newCurrency);
+    currenciesDB.push(newCurrency);
     fs.writeFile(currenciesDbPath, JSON.stringify(currenciesDB), (err) => {
       if (err) {
         console.log(err);
@@ -109,7 +111,7 @@ const updatedCurrency = function (req, res) {
     };
 
     //SAVE TO THE DATABASE
-    fs.writeFile(currenciesDb, JSON.stringify(currenciesDb), (err) => {
+    fs.writeFile(currenciesDbPath, JSON.stringify(currenciesDb), (err) => {
       if (err) {
         console.log(err);
         res.writeHead(500);
@@ -164,6 +166,6 @@ const deletcurrency = function (req, res) {
 //CREATE SERVER
 const server = http.createServer(requestHandler);
 server.listen(PORT, HOST_NAME, () => {
-  // currenciesDB = JSON.parse(fs.writeFileSync(currenciesDbPath, "utf8"));
+  currenciesDB = JSON.parse(fs.writeFileSync(currenciesDbPath, "utf8"));
   console.log(`Server is listening on ${HOST_NAME}:${PORT}`);
 });
